@@ -1,3 +1,26 @@
+# Confetti
+
+## 📈 How I did it
+
+1. First I used create-react-app with TS: `yarn create react-app confetti --template typescript`
+   It's great because it comes with webpack, Babel, ESLint and RTL (React Testing Library) so you don't have to do anything else to set up your working environment
+
+   + prettier
+   + stylelint? && stylelint-config-prettier
+
+2. Think of the structure.
+   My app is going to have authentication, so I'm needing mainly 2 intefraces: login/register and app
+
+3. Let's go with the login first. It was the first time for me doing this, so I followed this tutorial https://surajsharma.net/blog/react-login-form-typescript
+
+## 🤗 Thanks
+
+I learned how to create a React login form using useReducer hook and Typescript on https://surajsharma.net/blog/react-login-form-typescript
+
+
+-------
+REACT DOC
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,16 +67,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-
-## 📈 How I did it
-1. First I installed react TS with `yarn create react-app confetti --template typescript` (I'm using `yarn`)
-It's great because it comes with webpack and RTL (React Testing Library) so you don't have to do anything else to setup the working environment
-
-2. Think of the structure.
-My app is going to have authentication, so I'm needing mainly 2 screens: login/register and app
-
-3. Let's go with the login first. It was the first time for me doing this, so I followed this tutorial https://surajsharma.net/blog/react-login-form-typescript
-
-## 🤗 Thanks
-I learned how to create a React login form using useReducer hook and Typescript on https://surajsharma.net/blog/react-login-form-typescript
