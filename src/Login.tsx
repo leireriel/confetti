@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import React, { useReducer, useEffect } from 'react';
 import classnames from 'classnames';
 
 type State = {
@@ -53,15 +53,15 @@ const reducer = (state: State, action: Action): State => {
         helperText: action.payload,
         isError: true
       };
-      case 'setIsError':
-        return {
-          ...state,
-          isError: action.payload
-        }
+    case 'setIsError':
+      return {
+        ...state,
+        isError: action.payload
+      };
   }
 }
 
-const Login = () => {
+export const Login = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     username,
@@ -71,11 +71,61 @@ const Login = () => {
     isError
   } = state;
 
+  useEffect(() => {
+    if (username.trim() && password.trim()) {
+      dispatch({
+        type: 'setIsButtonDisabled',
+        payload: false
+      });
+    } else {
+      dispatch({
+        type: 'setIsButtonDisabled',
+        payload: true
+      });
+    }
+  }, [username, password])
+
+  const handleClick = () => {
+    if (username === 'abc@email.com' && password === 'password') {
+      dispatch({
+        type: 'loginSuccess',
+        payload: 'Login Successfull'
+      });
+    } else {
+      dispatch({
+        type: 'loginFailed',
+        payload: 'Incorrect username or password'
+      });
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.keyCode === 13 || event.which === 13) {
+      isButtonDisabled || handleClick();
+    }
+  };
+
+  const handleUsernameChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => (
+      dispatch({
+        type: 'setUsername',
+        payload: event.target.value
+      })
+    );
+
+  const handlePasswordChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => (
+      dispatch({
+        type: 'setPassword',
+        payload: event.target.value
+      })
+    );
+
   return (
     <>
       <h1>Login App</h1>
       <form method="post" action="/form">
-        <label for="username">Name</label>
+        <label htmlFor="username">Name</label>
         <input
           className={classnames('login-input', {
             'login-input_with-error': isError
@@ -88,7 +138,7 @@ const Login = () => {
           onChange={handleUsernameChange}
           onKeyPress={handleKeyPress}
         />
-        <label for="password">Name</label>
+        <label htmlFor="password">Name</label>
         <input
           className={classnames('login-input', {
             'login-input_with-error': isError
@@ -104,9 +154,11 @@ const Login = () => {
         {helperText && (
           <p>{helperText}</p>
         )}
-
-        // TODO BUTTON
-
+        <button onClick={handleClick} className={classnames('login-button', {
+            'login-button_disabled': isButtonDisabled
+          })}>
+          Login
+        </button>
       </form>
     </>
   );
